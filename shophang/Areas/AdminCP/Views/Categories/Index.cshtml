@@ -40,6 +40,7 @@
                                 }
                             </td>
                             <td class="text-center text-truncate" style="max-width: 10px;">
+                               
                                 <a asp-action="Edit" asp-route-id="@item.Id" class="text-primary ml-2" data-popup="tooltip" title="Sửa"><i class="fa fa-edit"></i></a>
                                 <a asp-action="Delete" asp-route-id="@item.Id" onclick="askToDelete(this); return false;" class="text-danger ml-2" data-popup="tooltip" title="Xóa"><i class="fa fa-trash"></i></a>
                             </td>
