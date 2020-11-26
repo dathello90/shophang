@@ -1,0 +1,53 @@
+﻿@model IEnumerable<shophang.Models.Category>
+@{
+    ViewData["Title"] = "Danh sách danh mmục";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <h6 class="card-title">@ViewData["Title"]</h6>
+            <a asp-area="AdminCP" asp-controller="Categories" asp-action="Create" class="btn btn-primary">Tạo mới</a>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Tên danh mục</th>
+                        <th scope="col">Mô tả</th>
+                        <th class="text-center" scope="col">Hoạt động</th>
+                        <th class="text-center" scope="col">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-truncate" style="max-width: 120px;">
+                                @Html.DisplayFor(modelItem => item.CategoryName)
+                            </td>
+                            <td td class="text-truncate" style="max-width: 300px;">
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td class="text-center" style="max-width: 30px;">
+                                @if (item.Status)
+                                {
+                                    <span class="text-success">Hiển thị</span>
+                                }
+                                else
+                                {
+                                    <span class="text-danger">Ẩn</span>
+                                }
+                            </td>
+                            <td class="text-center text-truncate" style="max-width: 10px;">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="text-primary ml-2" data-popup="tooltip" title="Sửa"><i class="fa fa-edit"></i></a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" onclick="askToDelete(this); return false;" class="text-danger ml-2" data-popup="tooltip" title="Xóa"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
