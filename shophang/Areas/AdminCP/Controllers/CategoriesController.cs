@@ -28,6 +28,7 @@ namespace shophang.Areas.AdminCP.Controllers
             IEnumerable<Category> model = _context.Categories.AsEnumerable();
             return View(model);
         }
+        
         [HttpGet("Create")]
         public IActionResult Create()
         {
@@ -103,6 +104,25 @@ namespace shophang.Areas.AdminCP.Controllers
             }
             return View(CategoryDTO);
         }
+        // POST: Categories/Delete/5
+        [HttpGet("Delete/{id}")]
+       
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (id<=0)
+            {
+                return NotFound();
+
+            }
+
+            var categoryToDelete = await _context.Categories.FindAsync(id);
+            categoryToDelete.Status = true;
+            _context.Categories.Remove(categoryToDelete);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+
+        }
+    
         private bool CategoryExists(int id)
         {
             return _context.Categories.Any(e => e.Id == id);

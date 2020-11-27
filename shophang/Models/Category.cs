@@ -17,6 +17,6 @@ namespace shophang.Models
         public bool Status { get; set; }
         public virtual ICollection<Product> Products { get; set; }
         public virtual ICollection<New> News { get; set; }
-        
+      
     }
 }
