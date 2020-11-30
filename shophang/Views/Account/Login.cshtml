@@ -1,0 +1,40 @@
+﻿@model User
+@{
+    ViewData["Title"] = "Đăng nhập";
+}
+<!-- Breadcrumb Start -->
+<div class="breadcrumb-wrap">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Products</a></li>
+            <li class="breadcrumb-item active">Login</li>
+        </ul>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+<!-- Login Start -->
+<form method="post" asp-controller="Account" asp-action="Login"
+      asp-route-returnurl="@Model.ReturnUrl">
+    @Html.ValidationSummary()
+
+    <div>
+        <label asp-for="UserName"></label>
+        <input asp-for="UserName" />
+        <span asp-validation-for="UserName"></span>
+    </div>
+
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" />
+        <span asp-validation-for="Password"></span>
+    </div>
+
+    <div>
+        <label asp-for="RememberMe"></label>
+        <input asp-for="RememberMe" />
+        <span asp-validation-for="RememberMe"></span>
+    </div>
+    <input type="submit" value="Login" />
+</form>
+<!-- Login End -->

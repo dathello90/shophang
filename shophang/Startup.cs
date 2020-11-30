@@ -27,17 +27,24 @@ namespace shophang
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Auto mapper
             services.AddControllersWithViews();
             services.AddAutoMapper(typeof(Startup));
 
             services.AddControllersWithViews();
-
+            //connect csdl
             services.AddDbContext<ApplicationDbContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-
+            //identity
+            //services.ConfigureApplicationCookie(config =>
+            //{
+            //    config.Cookie.Name = "Identity.Cookie";
+            //    config.LoginPath = "/Auth/Login";
+            //    config.AccessDeniedPath = "/Auth/AccessDenied";
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

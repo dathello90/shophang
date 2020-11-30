@@ -104,7 +104,7 @@ namespace shophang.Areas.AdminCP.Controllers
             }
             return View(CategoryDTO);
         }
-        // POST: Categories/Delete/5
+        // Get: Categories/Delete/5
         [HttpGet("Delete/{id}")]
        
         public async Task<IActionResult> Delete(int id)

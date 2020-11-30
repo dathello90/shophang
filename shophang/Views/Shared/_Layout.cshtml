@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+@{ 
+   
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -86,14 +90,19 @@
                             <a asp-action="Index" asp-controller="Contact" class="nav-link nav-link-3">Liên hệ</a>
                         </li>
                     </ul>
-                    <div class="navbar-nav ml-auto">
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tài khoản</a>
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Đăng nhập</a>
-                                <a href="#" class="dropdown-item">Đăng ký</a>
-                            </div>
-                        </div>
+                    <div>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <div>ititi</div>
+                            <form method="post" asp-controller="Account" aspcontroller="Logout">
+                                <input type="submit" value="Logout" />
+                            </form>
+                        }
+                        else
+                        {
+                            <a asp-controller="Account" asp-action="Login">Login</a>
+                            <a asp-controller="Account" asp-action="Register">Register</a>
+                        }
                     </div>
                 </div>
             </nav>
