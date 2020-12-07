@@ -1,6 +1,6 @@
 ﻿@using System.Security.Claims
-@{ 
-   
+@{
+
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -91,10 +91,11 @@
                         </li>
                     </ul>
                     <div>
-                        @if (User.Identity.IsAuthenticated)
+                        @if (User.IsSignedIn())
                         {
-                            <div>ititi</div>
-                            <form method="post" asp-controller="Account" aspcontroller="Logout">
+
+                            <div>@User.GetFirtName()</div>
+                            <form method="post" asp-controller="Account" asp-action="Logout">
                                 <input type="submit" value="Logout" />
                             </form>
                         }
@@ -104,6 +105,7 @@
                             <a asp-controller="Account" asp-action="Register">Register</a>
                         }
                     </div>
+
                 </div>
             </nav>
         </div>

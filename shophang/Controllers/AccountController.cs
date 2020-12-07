@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using shophang.DTOs;
 using Microsoft.AspNetCore.Identity;
 using shophang.Models;
+using Microsoft.Extensions.Logging;
 
 namespace shophang.Controllers
 {
     public class AccountController : Controller
     {
+        
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
         public AccountController(SignInManager<User> _signInManager,
@@ -17,6 +20,7 @@ namespace shophang.Controllers
         {
             this._signInManager = _signInManager;
             this._userManager = _userManager;
+            
         }
         [HttpGet]
         public ViewResult Register()
@@ -24,7 +28,7 @@ namespace shophang.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Register(User model)
+        public async Task<IActionResult> Register(UserDTO model)
         {
             if (ModelState.IsValid)
             {
@@ -46,6 +50,7 @@ namespace shophang.Controllers
             }
             return View();
         }
+        [HttpPost]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
@@ -54,11 +59,11 @@ namespace shophang.Controllers
         [HttpGet]
         public IActionResult Login(string returnUrl = "")
         {
-            var model = new User { ReturnUrl = returnUrl };
+            var model = new UserDTO { ReturnUrl = returnUrl };
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> Login(User model)
+        public async Task<IActionResult> Login(UserDTO model)
         {
             if (ModelState.IsValid)
             {

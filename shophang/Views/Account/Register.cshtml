@@ -1,4 +1,4 @@
-﻿@model User
+﻿@model shophang.DTOs.UserDTO
 @{
     ViewData["Title"] = "Đăng ký tài khoản";
 }
@@ -31,7 +31,7 @@
 
     <div>
         <label asp-for="ConfirmPassword"></label>
-        <input asp-for="ConfirmPassword" />
+        <input asp-for="Password" />
         <span asp-validation-for="ConfirmPassword"></span>
     </div>
 

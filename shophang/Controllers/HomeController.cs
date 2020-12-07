@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using shophang.Models;
 
 namespace shophang.Controllers
@@ -20,6 +21,7 @@ namespace shophang.Controllers
 
         public IActionResult Index()
         {
+            
             return View();
         }
 

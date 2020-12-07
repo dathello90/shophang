@@ -1,4 +1,5 @@
-﻿@model User
+﻿@model shophang.DTOs.UserDTO
+
 @{
     ViewData["Title"] = "Đăng nhập";
 }
@@ -15,9 +16,9 @@
 <!-- Breadcrumb End -->
 <!-- Login Start -->
 <form method="post" asp-controller="Account" asp-action="Login"
-      asp-route-returnurl="@Model.ReturnUrl">
+     
+    asp-route-returnurl = "@Model.ReturnUrl">
     @Html.ValidationSummary()
-
     <div>
         <label asp-for="UserName"></label>
         <input asp-for="UserName" />

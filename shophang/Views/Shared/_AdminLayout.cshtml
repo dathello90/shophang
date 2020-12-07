@@ -194,7 +194,22 @@
 
                             <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a>
 
-                            <a class="nav-link" href="#"><i class="fa fa-power-off"></i> Logout</a>
+                            <div>
+                                @if (User.IsSignedIn())
+                                {
+
+                                    <div>@User.GetFirtName()</div>
+                                    <form method="post" asp-controller="Dashboard" asp-action="Logout">
+                                        <input type="submit" value="Logout" />
+                                    </form>
+                                }
+                                else
+                                {
+                                    <a asp-controller="Account" asp-action="Login">Login</a>
+                                    <a asp-controller="Account" asp-action="Register">Register</a>
+                                }
+                            </div>
+
                         </div>
                     </div>
 

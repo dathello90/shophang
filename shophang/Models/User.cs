@@ -9,11 +9,6 @@ namespace shophang.Models
 {
     public class User:IdentityUser<int>
     {
-
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
-        [DataType(DataType.Password), Compare(nameof(Password))]
-        public string ConfirmPassword { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
 
@@ -21,8 +16,6 @@ namespace shophang.Models
         public string Address { get; set; }
         
         public bool Status { get; set; }
-        [Display(Name = "Remember Me")]
-        public bool RememberMe { get; set; }
-        public string ReturnUrl { get; set; }
+        
     }
 }

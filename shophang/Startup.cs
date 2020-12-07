@@ -12,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using AutoMapper;
+using shophang.Helpers;
+using Microsoft.AspNetCore.Identity;
 
 namespace shophang
 {
@@ -29,22 +31,25 @@ namespace shophang
         {
             //Auto mapper
             services.AddControllersWithViews();
-            services.AddAutoMapper(typeof(Startup));
+ 
 
-            services.AddControllersWithViews();
+            //services.AddControllersWithViews();
             //connect csdl
             services.AddDbContext<ApplicationDbContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddIdentity<User, Role>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-            //identity
-            //services.ConfigureApplicationCookie(config =>
-            //{
-            //    config.Cookie.Name = "Identity.Cookie";
-            //    config.LoginPath = "/Auth/Login";
-            //    config.AccessDeniedPath = "/Auth/AccessDenied";
-            //});
+        
+            services.AddIdentity<User, Role>(x =>
+            {
+                x.Password.RequireDigit = false;
+                x.Password.RequiredLength = 6;
+                x.Password.RequireNonAlphanumeric = false;
+                x.Password.RequireUppercase = false;
+                x.Password.RequireLowercase = false;
+            })
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddErrorDescriber<CustomIdentityErrorDescriber>()
+                .AddClaimsPrincipalFactory<CustomClaimsPrincipalFactory>();
+           services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,7 +69,7 @@ namespace shophang
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
